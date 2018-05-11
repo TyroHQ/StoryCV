@@ -1,0 +1,31 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "dependencies": {
+    "expo": "^27.0.1",
+    "re-reselect": "^2.1.0",
+    "react": "16.3.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
+    "react-redux": "^5.0.7",
+    "recompose": "^0.27.0",
+    "redux": "^4.0.0",
+    "redux-observable": "^1.0.0-alpha.2",
+    "reselect": "^3.0.1",
+    "rxjs": "6",
+    "styled-components": "^3.2.6",
+    "tslib": "^1.9.0",
+    "typesafe-actions": "2.0.0-1"
+  },
+  "devDependencies": {
+    "@types/expo": "^26.0.3",
+    "@types/react": "^16.3.14",
+    "@types/react-native": "^0.55.12",
+    "@types/react-redux": "^6.0.0",
+    "@types/recompose": "^0.26.1",
+    "@types/redux": "^3.6.0",
+    "@types/remote-redux-devtools": "^0.5.2",
+    "react-native-typescript-transformer": "^1.2.5",
+    "remote-redux-devtools": "^0.5.12",
+    "typescript": "^2.8.3"
+  }
+}
