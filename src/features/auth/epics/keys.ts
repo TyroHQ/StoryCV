@@ -1,5 +1,4 @@
-import { generateMnemonic } from "bip39";
-import { Wallet } from "ethers";
+import { Wallet, HDNode, utils } from "ethers";
 import { SecureStore } from "expo";
 import { Epic } from "redux-observable";
 import { from as ObservableFrom } from "rxjs";
@@ -61,7 +60,7 @@ export const createKeysEpic: Epic<RootAction, RootState> = (action$, state$) =>
     filter(isActionOf(createKeys.request)),
     tap(() => console.log("Got a request to create new keys")),
     map(action => {
-      const mnemonic = generateMnemonic();
+      const mnemonic = HDNode.entropyToMnemonic(utils.randomBytes(16));
       return getKeysFromMnemonic.request({ mnemonic });
     })
   );

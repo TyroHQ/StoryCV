@@ -242,5 +242,13 @@ declare module "ethers" {
 
   export namespace utils {
     export const bigNumberify: (number: string) => BigNumber;
+    export const randomBytes: (number: number) => Uint8Array;
+  }
+
+  export class HDNode {
+    static mnemonicToEntropy(mnemonic: string): string;
+    static entropyToMnemonic(entropy: Uint8Array): string;
+    static mnemonicToSeed(mnemonic: string): string;
+    static isValidMnemonic(string: string): boolean;
   }
 }
