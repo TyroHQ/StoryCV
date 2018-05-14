@@ -1,20 +1,7 @@
 import {
   createAsyncAction as buildAsync,
-  createStandardAction as buildAction,
-  ActionsUnion
+  createStandardAction as buildAction
 } from "typesafe-actions";
-
-// export const getSecret = buildAsync(
-//   "LOAD_SECRET_REQUEST",
-//   "LOAD_SECRET_SUCCESS",
-//   "LOAD_SECRET_FAILURE"
-// )<string, { error: string }, { secret: string }>();
-
-// export const updateSecret = buildAsync(
-//   "UPDATE_SECRET_REQUEST",
-//   "UPDATE_SECRET_SUCCESS",
-//   "UPDATE_SECRET_FAILURE"
-// )<{ key: string; value: string }, { error: string }, void>();
 
 export const chooseMnemonicLogin = buildAction("CHOOSE_MNEMONIC_LOGIN")();
 export const updateMnemonicField = buildAction("UPDATE_MNEMONIC_FIELD")<
