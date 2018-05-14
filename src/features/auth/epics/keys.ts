@@ -2,7 +2,7 @@ import { Wallet, HDNode, utils } from "ethers";
 import { SecureStore } from "expo";
 import { Epic } from "redux-observable";
 import { from as ObservableFrom } from "rxjs";
-import { filter, map, switchMap, tap } from "rxjs/operators";
+import { filter, map, switchMap, tap, withLatestFrom } from "rxjs/operators";
 import { isActionOf } from "typesafe-actions";
 
 import { RootAction } from "../../actions";
@@ -12,6 +12,7 @@ import {
   getKeysFromMnemonic,
   getKeysFromStorage
 } from "../actions";
+import { AUTH_STATE } from "../reducers";
 
 export const getKeysFromStorageEpic: Epic<RootAction, RootState> = (
   action$,
@@ -45,12 +46,25 @@ export const getKeysFromMnemonicEpic: Epic<RootAction, RootState> = (
   action$.pipe(
     filter(isActionOf(getKeysFromMnemonic.request)),
     tap(() => console.log("Got a request to fetch keys from mnemonic")),
-    map(action => {
-      const wallet = Wallet.fromMnemonic(action.payload.mnemonic);
+    withLatestFrom(state$),
+    map(([action, state]) => {
+      let mnemonic: string | undefined;
+      if (state.auth.state === AUTH_STATE.LOGGING_IN_MNEMONIC) {
+        mnemonic = state.auth.mnemonicField;
+      }
+      if (action.payload.mnemonic !== undefined) {
+        mnemonic = action.payload.mnemonic;
+      }
+      if (mnemonic === undefined) {
+        return getKeysFromMnemonic.failure({
+          error: "Must provide a mnemonic before requesting keys"
+        });
+      }
+      const wallet = Wallet.fromMnemonic(mnemonic);
       return getKeysFromMnemonic.success({
         privateKey: wallet.privateKey,
         publicKey: wallet.address,
-        mnemonicPhrase: action.payload.mnemonic
+        mnemonicPhrase: mnemonic
       });
     })
   );

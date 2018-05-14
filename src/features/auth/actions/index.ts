@@ -35,9 +35,7 @@ export const getKeysFromMnemonic = buildAsync(
   "GET_KEYS_FROM_MNEMONIC_SUCCESS",
   "GET_KEYS_FROM_MNEMONIC_FAILURE"
 )<
-  { mnemonic: string },
+  { mnemonic?: string },
   { publicKey: string; privateKey: string; mnemonicPhrase: string },
   { error: string }
 >();
-
-type Foo = ActionsUnion<typeof createKeys>;
