@@ -28,24 +28,31 @@ export const reducer = (
 ): State => {
   switch (action.type) {
     case getType(actions.getKeysFromStorage.request):
+    case getType(actions.createKeys.request):
     case getType(actions.getKeysFromMnemonic.request):
       return {
         state: AUTH_STATE.PENDING
       };
+
     case getType(actions.getKeysFromMnemonic.failure):
+    case getType(actions.createKeys.failure):
     case getType(actions.getKeysFromStorage.failure):
       return {
         state: AUTH_STATE.LOGGED_OUT
       };
+
     case getType(actions.getKeysFromStorage.success):
+    case getType(actions.createKeys.success):
     case getType(actions.getKeysFromMnemonic.success):
       return {
         state: AUTH_STATE.LOGGED_IN,
         privateKey: action.payload.privateKey,
         publicKey: action.payload.publicKey
       };
+
     case getType(actions.chooseMnemonicLogin):
       return { state: AUTH_STATE.LOGGING_IN_MNEMONIC, mnemonicField: "" };
+
     case getType(actions.updateMnemonicField):
       return {
         state: AUTH_STATE.LOGGING_IN_MNEMONIC,

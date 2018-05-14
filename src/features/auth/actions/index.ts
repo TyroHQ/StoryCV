@@ -20,6 +20,12 @@ export const updateMnemonicField = buildAction("UPDATE_MNEMONIC_FIELD")<
   string
 >();
 
+export const createKeys = buildAsync(
+  "CREATE_KEYS_REQUEST",
+  "CREATE_KEYS_SUCCESS",
+  "CREATE_KEYS_FAILURE"
+)<void, { publicKey: string; privateKey: string }, { error: string }>();
+
 export const getKeysFromStorage = buildAsync(
   "GET_KEYS_FROM_STORAGE_REQUEST",
   "GET_KEYS_FROM_STORAGE_SUCCESS",

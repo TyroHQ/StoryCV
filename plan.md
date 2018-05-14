@@ -46,8 +46,8 @@ type State = {
 ### Reducers
 
 * [x] `auth`
-* [ ] `app`
-* [ ] `accreditations`
+* [x] `app`
+* [x] `accreditations`
 
 ### Epics
 
