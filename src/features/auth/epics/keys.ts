@@ -1,55 +1,67 @@
-import { RootAction } from "../../actions";
+import { generateMnemonic } from "bip39";
+import { Wallet } from "ethers";
+import { SecureStore } from "expo";
 import { Epic } from "redux-observable";
 import { from as ObservableFrom } from "rxjs";
-import { SecureStore } from "expo";
-// const secureStore = Expo.SecureStor;
-
-import {
-  filter,
-  map,
-  mergeMap,
-  switchMap,
-  tap,
-  ignoreElements
-} from "rxjs/operators";
+import { filter, map, switchMap, tap } from "rxjs/operators";
 import { isActionOf } from "typesafe-actions";
 
-// import * as get from "../selectors";
+import { RootAction } from "../../actions";
 import { RootState } from "../../reducers";
-import { getSecret, secretUpdate } from "../actions";
+import {
+  createKeys,
+  getKeysFromMnemonic,
+  getKeysFromStorage
+} from "../actions";
 
-export const getSecretEpic: Epic<RootAction, RootState> = (action$, state$) =>
+export const getKeysFromStorageEpic: Epic<RootAction, RootState> = (
+  action$,
+  state$
+) =>
   action$.pipe(
-    filter(isActionOf(getSecret.request)),
-    tap(() => console.log("Got a get request")),
+    filter(isActionOf(getKeysFromStorage.request)),
+    tap(() => console.log("Got a request to fetch keys from storage")),
     switchMap(a =>
       ObservableFrom(
-        SecureStore.getItemAsync(a.payload, { keychainService: "TestService" })
+        SecureStore.getItemAsync("user-mnemonic", {
+          keychainService: "StoryCV"
+        })
       )
     ),
-    map(secret => {
-      if (secret === null) {
-        return getSecret.failure({ error: "Secret was null" });
+    map((mnemonic: string | null) => {
+      if (mnemonic === null) {
+        return getKeysFromStorage.failure({
+          error: "Could not retrieve mnemonic"
+        });
       }
-      return getSecret.success({ secret });
+
+      return getKeysFromMnemonic.request({ mnemonic });
     })
   );
 
-export const setSecretEpic: Epic<RootAction, RootState> = (action$, state$) =>
+export const getKeysFromMnemonicEpic: Epic<RootAction, RootState> = (
+  action$,
+  state$
+) =>
   action$.pipe(
-    filter(isActionOf(secretUpdate.request)),
-    tap(() => console.log("Got a set request")),
-    switchMap(
-      a =>
-        ObservableFrom(
-          SecureStore.setItemAsync(a.payload.key, a.payload.value, {
-            keychainService: "TestService"
-          })
-        ),
-      (action, result): RootAction[] => [
-        secretUpdate.success(),
-        getSecret.request(action.payload.key)
-      ]
-    ),
-    mergeMap((x: RootAction[]) => x)
+    filter(isActionOf(getKeysFromMnemonic.request)),
+    tap(() => console.log("Got a request to fetch keys from mnemonic")),
+    map(action => {
+      const wallet = Wallet.fromMnemonic(action.payload.mnemonic);
+      return getKeysFromMnemonic.success({
+        privateKey: wallet.privateKey,
+        publicKey: wallet.address,
+        mnemonicPhrase: action.payload.mnemonic
+      });
+    })
+  );
+
+export const createKeysEpic: Epic<RootAction, RootState> = (action$, state$) =>
+  action$.pipe(
+    filter(isActionOf(createKeys.request)),
+    tap(() => console.log("Got a request to create new keys")),
+    map(action => {
+      const mnemonic = generateMnemonic();
+      return getKeysFromMnemonic.request({ mnemonic });
+    })
   );

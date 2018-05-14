@@ -18,6 +18,7 @@ type State = {
         state: LOGGED_IN;
         privateKey: string;
         publicKey: string;
+        mnemonicPhrase: string;
       }
     | {
         state: LOGGING_IN_MNEMONIC;
@@ -31,6 +32,9 @@ type State = {
 
 ### Actions
 
+* [x] `CREATE_KEYS_REQUEST;`
+* [x] `CREATE_KEYS_FAILED;`
+* [x] `CREATE_KEYS_SUCCESS;`
 * [x] `GET_KEYS_FROM_STORAGE_REQUEST;`
 * [x] `GET_KEYS_FROM_STORAGE_FAILED;`
 * [x] `GET_KEYS_FROM_STORAGE_SUCCESS;`

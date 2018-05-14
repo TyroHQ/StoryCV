@@ -16,6 +16,7 @@ export type State =
       state: AUTH_STATE.LOGGED_IN;
       privateKey: string;
       publicKey: string;
+      mnemonicPhrase: string;
     }
   | {
       state: AUTH_STATE.LOGGING_IN_MNEMONIC;
@@ -35,19 +36,17 @@ export const reducer = (
       };
 
     case getType(actions.getKeysFromMnemonic.failure):
-    case getType(actions.createKeys.failure):
     case getType(actions.getKeysFromStorage.failure):
       return {
         state: AUTH_STATE.LOGGED_OUT
       };
 
-    case getType(actions.getKeysFromStorage.success):
-    case getType(actions.createKeys.success):
     case getType(actions.getKeysFromMnemonic.success):
       return {
         state: AUTH_STATE.LOGGED_IN,
         privateKey: action.payload.privateKey,
-        publicKey: action.payload.publicKey
+        publicKey: action.payload.publicKey,
+        mnemonicPhrase: action.payload.mnemonicPhrase
       };
 
     case getType(actions.chooseMnemonicLogin):

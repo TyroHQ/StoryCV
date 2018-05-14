@@ -13,7 +13,7 @@ import { RootState } from "../../../../features/reducers";
 // import { selectors as get } from "../../features/auth";
 type ReduxState = Loadable<{ secret: string }>;
 const withRedux = connect((state: RootState): ReduxState => {
-  const keys = state.auth.keys;
+  const keys = state.auth.auth;
   if (keys.state !== LoadableState.LOADED) return keys;
   return {
     state: LoadableState.LOADED,

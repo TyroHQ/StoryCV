@@ -1,6 +1,7 @@
 import {
   createAsyncAction as buildAsync,
-  createStandardAction as buildAction
+  createStandardAction as buildAction,
+  ActionsUnion
 } from "typesafe-actions";
 
 // export const getSecret = buildAsync(
@@ -20,17 +21,14 @@ export const updateMnemonicField = buildAction("UPDATE_MNEMONIC_FIELD")<
   string
 >();
 
-export const createKeys = buildAsync(
-  "CREATE_KEYS_REQUEST",
-  "CREATE_KEYS_SUCCESS",
-  "CREATE_KEYS_FAILURE"
-)<void, { publicKey: string; privateKey: string }, { error: string }>();
+export const createKeys = {
+  request: buildAction("CREATE_KEYS_REQUEST")()
+};
 
-export const getKeysFromStorage = buildAsync(
-  "GET_KEYS_FROM_STORAGE_REQUEST",
-  "GET_KEYS_FROM_STORAGE_SUCCESS",
-  "GET_KEYS_FROM_STORAGE_FAILURE"
-)<void, { publicKey: string; privateKey: string }, { error: string }>();
+export const getKeysFromStorage = {
+  request: buildAction("GET_KEYS_FROM_STORAGE_REQUEST")(),
+  failure: buildAction("GET_KEYS_FROM_STORAGE_FAILURE")<{ error: string }>()
+};
 
 export const getKeysFromMnemonic = buildAsync(
   "GET_KEYS_FROM_MNEMONIC_REQUEST",
@@ -38,6 +36,8 @@ export const getKeysFromMnemonic = buildAsync(
   "GET_KEYS_FROM_MNEMONIC_FAILURE"
 )<
   { mnemonic: string },
-  { publicKey: string; privateKey: string },
+  { publicKey: string; privateKey: string; mnemonicPhrase: string },
   { error: string }
 >();
+
+type Foo = ActionsUnion<typeof createKeys>;
