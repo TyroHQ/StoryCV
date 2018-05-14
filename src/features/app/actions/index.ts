@@ -1,8 +1,4 @@
-import {
-  createAsyncAction as buildAsync,
-  createStandardAction as buildAction,
-  createStandardAction
-} from "typesafe-actions";
+import { createAsyncAction as buildAsync } from "typesafe-actions";
 
 export const fetchAccreditations = buildAsync(
   "FETCH_ACCREDITATIONS_REQUEST",

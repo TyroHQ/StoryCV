@@ -2,6 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "dependencies": {
+    "ethers": "^3.0.15",
     "expo": "^27.0.1",
     "re-reselect": "^2.1.0",
     "react": "16.3.1",
@@ -14,7 +15,7 @@
     "rxjs": "6",
     "styled-components": "^3.2.6",
     "tslib": "^1.9.0",
-    "typesafe-actions": "2.0.0-1"
+    "typesafe-actions": "2.0.0-rc.1"
   },
   "devDependencies": {
     "@types/expo": "^26.0.3",
