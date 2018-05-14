@@ -45,7 +45,7 @@ type State = {
 
 ### Reducers
 
-* [ ] `auth`
+* [x] `auth`
 * [ ] `app`
 * [ ] `accreditations`
 

@@ -16,7 +16,7 @@ import {
 // )<{ key: string; value: string }, { error: string }, void>();
 
 export const chooseMnemonicLogin = buildAction("CHOOSE_MNEMONIC_LOGIN")();
-export const updateMnemonicField = buildAction("CHOOSE_MNEMONIC_LOGIN")<
+export const updateMnemonicField = buildAction("UPDATE_MNEMONIC_FIELD")<
   string
 >();
 
@@ -24,7 +24,7 @@ export const getKeysFromStorage = buildAsync(
   "GET_KEYS_FROM_STORAGE_REQUEST",
   "GET_KEYS_FROM_STORAGE_SUCCESS",
   "GET_KEYS_FROM_STORAGE_FAILURE"
-)<void, { error: string }, { publicKey: string; privateKey: string }>();
+)<void, { publicKey: string; privateKey: string }, { error: string }>();
 
 export const getKeysFromMnemonic = buildAsync(
   "GET_KEYS_FROM_MNEMONIC_REQUEST",
@@ -32,6 +32,6 @@ export const getKeysFromMnemonic = buildAsync(
   "GET_KEYS_FROM_MNEMONIC_FAILURE"
 )<
   { mnemonic: string },
-  { error: string },
-  { publicKey: string; privateKey: string }
+  { publicKey: string; privateKey: string },
+  { error: string }
 >();
