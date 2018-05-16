@@ -15,6 +15,7 @@ declare module "ethers" {
       progressCallback?: (percent: number) => void
     ): Promise<Wallet>;
     static fromMnemonic(mnemonic: string, path?: string): Wallet;
+    static verifyMessage(message: string, signature: string): string;
     static fromBrainWallet(
       username: string,
       password: string,
@@ -26,7 +27,7 @@ declare module "ethers" {
     provider: Provider;
     getAddress(): string;
     sign(transaction: Transaction): string;
-    signMessage(message: void): string;
+    signMessage(message: string): string;
     encrypt(
       password: string,
       options?: any,
@@ -243,6 +244,10 @@ declare module "ethers" {
   export namespace utils {
     export const bigNumberify: (number: string) => BigNumber;
     export const randomBytes: (number: number) => Uint8Array;
+    export const getAddress: (
+      address: string,
+      generateIcap?: boolean
+    ) => string;
   }
 
   export class HDNode {

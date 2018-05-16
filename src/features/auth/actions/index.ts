@@ -28,6 +28,8 @@ export const getKeysFromStorage = {
   }>()
 };
 
+export const loggedIn = buildAction("LOGGED_IN")();
+
 export const getKeysFromMnemonic = buildAsync(
   "GET_KEYS_FROM_MNEMONIC_REQUEST",
   "GET_KEYS_FROM_MNEMONIC_SUCCESS",

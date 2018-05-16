@@ -1,4 +1,5 @@
-// import { compose } from "redux";
-declare const window: {
+// declare global {
+interface Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
-};
+}
+// }

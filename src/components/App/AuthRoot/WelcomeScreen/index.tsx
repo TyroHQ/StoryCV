@@ -1,14 +1,8 @@
 import * as React from "react";
-import { Text, View as PlainView, Button } from "react-native";
+import { Button } from "react-native";
 
+import { BackgroundView, Text } from "../../StyledComponents";
 import { enhance } from "./enhancer";
-import styled from "styled-components";
-
-const View = styled(PlainView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
 
 export interface WelcomeScreenComponentProps {
   register: () => any;
@@ -19,11 +13,11 @@ export const WelcomeScreenComponent: React.SFC<
   WelcomeScreenComponentProps
 > = props => {
   return (
-    <View>
+    <BackgroundView>
       <Text>Welcome to Story</Text>
       <Button title="Click here to start" onPress={props.register} />
       <Button title="Restore from mnemonic" onPress={props.loginMnemonic} />
-    </View>
+    </BackgroundView>
   );
 };
 

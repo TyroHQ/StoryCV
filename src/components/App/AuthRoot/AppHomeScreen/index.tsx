@@ -1,15 +1,8 @@
 import * as React from "react";
 import { Text } from "react-native";
-import { View as PlainView } from "react-native";
-import styled from "styled-components";
+import { BackgroundView, Title, HighlightedText } from "../../StyledComponents";
 import { enhance } from "./enhancer";
 import { Button } from "react-native";
-import { TouchableHighlight } from "react-native";
-const View = styled(PlainView)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
 
 export interface AppHomeScreenComponentProps {
   publicKey: string;
@@ -18,36 +11,22 @@ export interface AppHomeScreenComponentProps {
   logout: () => any;
 }
 
-const PinkText = styled(Text)`
-  color: hotpink;
-`;
-
-const Title = styled(Text)`
-  font-size: 20;
-  font-weight: bold;
-  text-align: left;
-`;
-
-const HomeView = styled(View)`
-  align-items: flex-start;
-`;
-
 export const AppHomeScreenComponent: React.SFC<
   AppHomeScreenComponentProps
 > = props => {
   return (
-    <HomeView>
+    <BackgroundView>
       <Title>App Home Screen</Title>
       <Title>Public Key:</Title>
-      <PinkText selectable>{props.publicKey}</PinkText>
+      <HighlightedText selectable>{props.publicKey}</HighlightedText>
       <Title>Private Key:</Title>
-      <PinkText selectable>{props.privateKey}</PinkText>
+      <HighlightedText selectable>{props.privateKey}</HighlightedText>
       <Title>Mnemonic String: {/* <TouchableHighlight> */}</Title>
-      <PinkText selectable>{props.mnemonicString}</PinkText>
+      <HighlightedText selectable>{props.mnemonicString}</HighlightedText>
       <Text> </Text>
       {/* </TouchableHighlight> */}
       <Button title="Log out" onPress={props.logout} />
-    </HomeView>
+    </BackgroundView>
   );
 };
 

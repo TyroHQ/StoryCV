@@ -32,7 +32,6 @@ export const reducer = (
     case getType(actions.createKeys.request):
     case getType(actions.getKeysFromMnemonic.request):
     case getType(actions.clearKeys.request):
-      console.log("Went through reducer " + Date.now() / 1000);
       return {
         state: AUTH_STATE.PENDING
       };

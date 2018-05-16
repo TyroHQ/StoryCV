@@ -1,31 +1,31 @@
-import { Wallet, HDNode, utils } from "ethers";
+import { HDNode, utils, Wallet } from "ethers";
 import { SecureStore } from "expo";
 import { Epic } from "redux-observable";
-import { from as ObservableFrom, Observable } from "rxjs";
+import { from as ObservableFrom } from "rxjs";
 import {
+  catchError,
   filter,
   map,
-  switchMap,
-  tap,
-  withLatestFrom,
   mapTo,
-  catchError
+  switchMap,
+  withLatestFrom
 } from "rxjs/operators";
-import { isActionOf, ActionsUnion } from "typesafe-actions";
+import { isActionOf } from "typesafe-actions";
 
+import {
+  STORY_KEYCHAIN_KEYS,
+  STORY_KEYCHAIN_SERVICE
+} from "../../../../config";
 import { RootAction } from "../../actions";
 import { RootState } from "../../reducers";
 import {
+  clearKeys,
   createKeys,
   getKeysFromMnemonic,
   getKeysFromStorage,
-  clearKeys
+  loggedIn
 } from "../actions";
 import { AUTH_STATE } from "../reducers";
-import {
-  STORY_KEYCHAIN_SERVICE,
-  STORY_KEYCHAIN_KEYS
-} from "../../../../config";
 
 export const getKeysFromStorageEpic: Epic<RootAction, RootState> = (
   action$,
@@ -87,6 +87,14 @@ const getWallet = async (mnemonic: string) => {
   // };
   return wallet;
 };
+
+export const loggedInEpic: Epic<RootAction, RootState> = (action$, state$) =>
+  action$.pipe(
+    filter(
+      isActionOf([getKeysFromMnemonic.success, getKeysFromStorage.success]),
+      mapTo(loggedIn)
+    )
+  );
 
 export const getKeysFromMnemonicEpic: Epic<RootAction, RootState> = (
   action$,

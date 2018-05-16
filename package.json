@@ -13,6 +13,8 @@
     "redux-observable": "^1.0.0-alpha.2",
     "reselect": "^3.0.1",
     "rxjs": "6",
+    "sha256": "^0.2.0",
+    "strict-uri-encode": "^2.0.0",
     "styled-components": "^3.2.6",
     "tslib": "^1.9.0",
     "typesafe-actions": "2.0.0-rc.1"
@@ -25,6 +27,7 @@
     "@types/recompose": "^0.26.1",
     "@types/redux": "^3.6.0",
     "@types/remote-redux-devtools": "^0.5.2",
+    "@types/strict-uri-encode": "^2.0.0",
     "react-native-typescript-transformer": "^1.2.5",
     "remote-redux-devtools": "^0.5.12",
     "typescript": "^2.8.3"

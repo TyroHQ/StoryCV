@@ -1,22 +1,15 @@
 import * as React from "react";
-import { Text, View as PlainView } from "react-native";
 
 import { AUTH_STATE } from "../../../features/auth/reducers";
+import { BackgroundView, Text } from "../StyledComponents";
 import { AppHomeScreen } from "./AppHomeScreen";
 import { enhance } from "./enhancer";
 import { MnemonicEntryScreen } from "./MnemonicEntryScreen";
 import { WelcomeScreen } from "./WelcomeScreen";
-import styled from "styled-components";
 
 export type AuthRootProps = {
   authState: AUTH_STATE;
 };
-
-const View = styled(PlainView)`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
 
 export const AuthRootComponent: React.SFC<AuthRootProps> = props => {
   switch (props.authState) {
@@ -26,9 +19,9 @@ export const AuthRootComponent: React.SFC<AuthRootProps> = props => {
       return <MnemonicEntryScreen />;
     case AUTH_STATE.PENDING:
       return (
-        <View>
+        <BackgroundView>
           <Text>Logging in...</Text>
-        </View>
+        </BackgroundView>
       );
     case AUTH_STATE.LOGGED_OUT:
       return <WelcomeScreen />;
