@@ -41,6 +41,7 @@ export const reducer = (
         state: AUTH_STATE.LOGGED_OUT
       };
 
+    case getType(actions.getKeysFromStorage.success):
     case getType(actions.getKeysFromMnemonic.success):
       return {
         state: AUTH_STATE.LOGGED_IN,

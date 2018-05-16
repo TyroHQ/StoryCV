@@ -9,16 +9,18 @@ import {
   withLoader
 } from "../../../../common/Loadable";
 import { RootState } from "../../../../features/reducers";
+import { AUTH_STATE } from "../../../../features/auth/reducers";
 
 // import { selectors as get } from "../../features/auth";
 type ReduxState = Loadable<{ secret: string }>;
 const withRedux = connect((state: RootState): ReduxState => {
-  const keys = state.auth.auth;
-  if (keys.state !== LoadableState.LOADED) return keys;
+  const keys = state.auth;
+  if (keys.state !== AUTH_STATE.LOGGED_IN)
+    return { state: LoadableState.UNKNOWN };
   return {
     state: LoadableState.LOADED,
     item: {
-      secret: keys.item
+      secret: keys.mnemonicPhrase
     }
   };
 });

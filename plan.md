@@ -60,6 +60,20 @@ type State = {
 * [x] `Epic<GET_KEYS_FROM_MNEMONIC_REQUEST, GET_KEYS_FROM_MNEMONIC_FAILED | GET_KEYS_FROM_MNEMONIC_SUCCESS>`
 * [ ] `Epic<FETCH_ACCREDITATIONS_REQUEST, FETCH_ACCREDITATIONS_FAILED | FETCH_ACCREDITATIONS_SUCCESS>`
 
-### Components
+### Components - templates
 
-* [ ]
+* [x] `WelcomeScreen`
+* [x] `MnemonicEntryScreen`
+* [x] `AppHomeScreen`
+
+### Components - functionality
+
+* [x] `WelcomeScreen`
+* [?] `MnemonicEntryScreen`
+* [ ] `AppHomeScreen`
+
+### Components - appearance
+
+* [ ] `WelcomeScreen`
+* [ ] `MnemonicEntryScreen`
+* [ ] `AppHomeScreen`

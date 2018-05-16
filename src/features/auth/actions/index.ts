@@ -12,9 +12,20 @@ export const createKeys = {
   request: buildAction("CREATE_KEYS_REQUEST")()
 };
 
+export const clearKeys = buildAsync(
+  "CLEAR_KEYS_FROM_STORAGE_REQUEST",
+  "CLEAR_KEYS_FROM_STORAGE_SUCCESS",
+  "CLEAR_KEYS_FROM_STORAGE_FAILURE"
+)<void, void, { error: string }>();
+
 export const getKeysFromStorage = {
   request: buildAction("GET_KEYS_FROM_STORAGE_REQUEST")(),
-  failure: buildAction("GET_KEYS_FROM_STORAGE_FAILURE")<{ error: string }>()
+  failure: buildAction("GET_KEYS_FROM_STORAGE_FAILURE")<{ error: string }>(),
+  success: buildAction("GET_KEYS_FROM_STORAGE_SUCCESS")<{
+    publicKey: string;
+    privateKey: string;
+    mnemonicPhrase: string;
+  }>()
 };
 
 export const getKeysFromMnemonic = buildAsync(
