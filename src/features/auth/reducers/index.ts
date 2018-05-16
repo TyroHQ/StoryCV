@@ -31,12 +31,16 @@ export const reducer = (
     case getType(actions.getKeysFromStorage.request):
     case getType(actions.createKeys.request):
     case getType(actions.getKeysFromMnemonic.request):
+    case getType(actions.clearKeys.request):
+      console.log("Went through reducer " + Date.now() / 1000);
       return {
         state: AUTH_STATE.PENDING
       };
 
     case getType(actions.getKeysFromMnemonic.failure):
     case getType(actions.getKeysFromStorage.failure):
+    case getType(actions.clearKeys.failure):
+    case getType(actions.clearKeys.success):
       return {
         state: AUTH_STATE.LOGGED_OUT
       };

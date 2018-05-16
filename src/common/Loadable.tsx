@@ -38,10 +38,7 @@ export const withLoader = branch<Loadable<any>>(
 );
 
 export const with404 = branch<Loadable<any>>(
-  x =>
-    console.log("Checking error") ||
-    x.state === LoadableState.FAILED ||
-    x.state === LoadableState.UNKNOWN,
+  x => x.state === LoadableState.FAILED || x.state === LoadableState.UNKNOWN,
   renderComponent(() => <Text>Not Found</Text>)
 );
 
@@ -71,14 +68,13 @@ export const withLoadedContent = function<L>(
 
 export const withLoaderForProp = <K extends string>(k: K) =>
   branch<{ [P in K]: Loadable<any> }>(
-    x => console.log("Checking loaded") || x[k].state === LoadableState.PENDING,
+    x => x[k].state === LoadableState.PENDING,
     renderComponent(Loading)
   );
 
 export const with404ForProp = <K extends string>(k: K) =>
   branch<{ [P in K]: Loadable<any> }>(
     x =>
-      console.log("Checking error") ||
       x[k].state === LoadableState.FAILED ||
       x[k].state === LoadableState.UNKNOWN,
     renderComponent(() => <Text>Page Not Found</Text>)
