@@ -1,3 +1,21 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/.expo": true,
+    "**/.expo-source": true,
+    "**/.vscode": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+
+    ".babelrc": true,
+    ".gitignore": true,
+    ".watchmanconfig": true,
+    "yarn.lock": true,
+    "yarn-error.log": true,
+    "rn-cli.config.js": true
+  }
 }

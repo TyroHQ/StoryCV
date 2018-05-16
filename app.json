@@ -1,14 +1,12 @@
 {
   "expo": {
-    "name": "learner-app",
+    "name": "Story",
     "description": "Mobile app for Digital CV owners",
     "slug": "learner-app",
+    "scheme": "story",
     "privacy": "public",
     "sdkVersion": "27.0.0",
-    "platforms": [
-      // "ios",
-      "android"
-    ],
+    "platforms": ["android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
